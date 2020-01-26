@@ -3,7 +3,7 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 
 #testing url
-my_url = "https://www.rottentomatoes.com/m/parasite_2019";
+my_url = "https://www.rottentomatoes.com/m/bad_boys_for_life";
 
 uClient = uReq(my_url)
 page_html = uClient.read()
@@ -28,20 +28,37 @@ for item in (genreArray[1].findAll('a')):
     if (item != genreArray[1].findAll('a')[-1]):
         genreString += ", "
 
-#Getting the runtime - store in runTime
-runTime = genreArray[6].text.strip()
+#Special Case of discrepancy    
+if (len(genreArray) == 8):
+    #Getting the runtime - store in runTime
+    runTime = genreArray[6].text.strip()
 
-#Getting the Studio - store in studio
-studio = genreArray[7].text.strip();
+    #Getting the Studio - store in studio
+    studio = genreArray[7].text.strip();
 
-#Getting the directors - stored in directedBy
-directorArray = genreArray[2].findAll("a")
-directedBy = ""
-for item in directorArray:
-    directedBy += item.text.strip()
-    if (item != directorArray[-1]):
-        directedBy += ", "
-        
+    #Getting the directors - stored in directedBy
+    directorArray = genreArray[2].findAll("a")
+    directedBy = ""
+    for item in directorArray:
+        directedBy += item.text.strip()
+        if (item != directorArray[-1]):
+            directedBy += ", "
+
+if (len(genreArray) == 7):
+    #Getting the runtime - store in runTime
+    runTime = genreArray[5].text.strip()
+
+    #Getting the Studio - store in studio
+    studio = genreArray[6].text.strip();
+
+    #Getting the directors - stored in directedBy
+    directorArray = genreArray[2].findAll("a")
+    directedBy = ""
+    for item in directorArray:
+        directedBy += item.text.strip()
+        if (item != directorArray[-1]):
+            directedBy += ", " 
+            
 #Getting the synopsis - stored in realSynopsis
 synopsisArray = page_soup.findAll("div",{"id":"movieSynopsis"})
 realSynopsis = synopsisArray[0].text.strip().replace('\'',"")
