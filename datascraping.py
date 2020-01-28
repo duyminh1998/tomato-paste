@@ -1,3 +1,8 @@
+from bs4 import BeautifulSoup
+import requests
+import pandas as pd
+
+
 def printData(url):
     import bs4
     from urllib.request import urlopen as uReq
@@ -29,7 +34,25 @@ def printData(url):
         if (item != genreArray[1].findAll('a')[-1]):
             genreString += ", "
 
-    #Special Case        
+    directedBy = "";   
+
+
+
+    #Special Case 
+    if (len(genreArray) == 9):
+        #Getting the runtime - store in runTime
+        runTime = genreArray[7].text.strip()
+
+        #Getting the Studio - store in studio
+        studio = genreArray[8].text.strip();
+
+        #Getting the directors - stored in directedBy
+        directorArray = genreArray[2].findAll("a")
+        for item in directorArray:
+            directedBy += item.text.strip()
+            if (item != directorArray[-1]):
+                directedBy += ", "
+
     if (len(genreArray) == 8):
         #Getting the runtime - store in runTime
         runTime = genreArray[6].text.strip()
@@ -39,7 +62,6 @@ def printData(url):
 
         #Getting the directors - stored in directedBy
         directorArray = genreArray[2].findAll("a")
-        directedBy = ""
         for item in directorArray:
             directedBy += item.text.strip()
             if (item != directorArray[-1]):
@@ -54,7 +76,6 @@ def printData(url):
 
         #Getting the directors - stored in directedBy
         directorArray = genreArray[2].findAll("a")
-        directedBy = ""
         for item in directorArray:
             directedBy += item.text.strip()
             if (item != directorArray[-1]):
@@ -81,7 +102,12 @@ def printData(url):
 
     #Getting the critics concensus - stored in criticsConcensus
     criticArray = page_soup.findAll("p",{"class":"mop-ratings-wrap__text mop-ratings-wrap__text--concensus"})
-    criticsConcensus = criticArray[0].text.strip()
+    criticsConcensus = "";
+    if (len(criticArray) == 0):
+        criticsConcensus = "N/A";
+    else:
+        criticsConcensus = criticArray[0].text.strip()
+
 
     #Getting the top 3 cast members - stored in cast
     castHTMLArray = page_soup.findAll("div",{"class":"castSection"})
@@ -95,21 +121,74 @@ def printData(url):
         x = x + 2
 
     #Checking the attributes
-    print("Title:             " + realTitle)
-    print("Critics Concensus: " + criticsConcensus)
-    print("Tomato Meter:      " + tomatoMeter)
-    print("Tomato Count:      " + tomatoCount)
-    print("Audience Score:    " + audienceScore)
-    print("Audience Count:    " + audienceCount)
-    print("Synopsis:         " + realSynopsis)
-    print("Rating:           " + rating)
-    print("Genre:            " + genreString)
-    print("Directed By:      " + directedBy)
-    print("Studio:           " + studio)
-    print("Run Time:         " + runTime)
-    print("Top 3 Casts:      " + cast)
+    # print("Title:             " + realTitle)
+    # print("Critics Concensus: " + criticsConcensus)
+    # print("Tomato Meter:      " + tomatoMeter)
+    # print("Tomato Count:      " + tomatoCount)
+    # print("Audience Score:    " + audienceScore)
+    # print("Audience Count:    " + audienceCount)
+    # print("Synopsis:         " + realSynopsis)
+    # print("Rating:           " + rating)
+    # print("Genre:            " + genreString)
+    # print("Directed By:      " + directedBy)
+    # print("Studio:           " + studio)
+    # print("Run Time:         " + runTime)
+    # print("Top 3 Casts:      " + cast)
+    return [realTitle, criticsConcensus, tomatoMeter, tomatoCount, 
+            audienceScore, audienceCount, realSynopsis, rating, genreString, 
+            directedBy, studio, runTime, cast]
 
-    
 
-#Testing the function    
-printData("https://www.rottentomatoes.com/m/terminator_dark_fate")
+#Minh's code
+
+r = requests.get('https://www.rottentomatoes.com/top/bestofrt/')
+
+soup = BeautifulSoup(r.text, 'html.parser')
+
+names = soup.findAll("a", {"class": "unstyled articleLink"})
+
+for i in range(43, len(names) - 2):
+    printData("https://www.rottentomatoes.com" + names[i]["href"])
+
+
+# printData("https://www.rottentomatoes.com/m/la_grande_illusion")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
