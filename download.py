@@ -6,7 +6,7 @@ df = pd.DataFrame(columns = ["realTitle", "criticsConcensus", "tomatoMeter", "to
             "audienceScore", "audienceCount", "realSynopsis", "rating", "genreString", 
             "directedBy", "studio", "runTime", "cast"])
 
-data = pd.read_csv("movies_metadata.csv")
+data = pd.read_csv("movies_metadata.csv", error_bad_lines=False, dtype='unicode')
 
 j = 0
 err_list = []
