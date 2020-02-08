@@ -52,13 +52,13 @@ def printData(url):
             isNormal = True
         if (isNormal == True):
             runTime = genreArray[7].text.strip()
-            if(len(genreArray[8]) != 1):
+            if(len(genreArray[8]) != 1 or genreArray[8].text[0] == '$'):
                 studio = "N/A"
             else:
                 studio = genreArray[8].text.strip();
         else: #Else switch the index around
             runTime = genreArray[8].text.strip()
-            if(len(genreArray[7]) != 1):
+            if(len(genreArray[7]) != 1 or genreArray[7].text[0] == '$'):
                 studio = "N/A"
             else:
                 studio = genreArray[7].text.strip();
@@ -71,35 +71,35 @@ def printData(url):
             isNormal = True
         if (isNormal == True):
             runTime = genreArray[6].text.strip()
-            if(len(genreArray[7]) != 1):
+            if(len(genreArray[7]) != 1 or genreArray[7].text[0] == '$'):
                 studio = "N/A"
             else:
                 studio = genreArray[7].text.strip();
         else: #Else switch the index around
             runTime = genreArray[7].text.strip()
-            if(len(genreArray[6]) != 1):
+            if(len(genreArray[6]) != 1 or genreArray[6].text[0] == '$'):
                 studio = "N/A"
             else:
                 studio = genreArray[6].text.strip();
 
     if (len(genreArray) == 7):
-        possibleRunTime = genreArray[5].text.strip();
-        isNormal = False
-        lastCharInPossibleRunTime = possibleRunTime[len(possibleRunTime)-1]
-        if (lastCharInPossibleRunTime == 's'):
-            isNormal = True
-        if (isNormal == True):
-            runTime = genreArray[5].text.strip()
-            if(len(genreArray[6]) != 1):
-                studio = "N/A"
-            else:
-                studio = genreArray[6].text.strip();
-        else: #Else switch the index around
-            runTime = genreArray[6].text.strip()
-            if(len(genreArray[5]) != 1):
-                studio = "N/A"
-            else:
-                studio = genreArray[5].text.strip();
+            possibleRunTime = genreArray[5].text.strip();
+            isNormal = False
+            lastCharInPossibleRunTime = possibleRunTime[len(possibleRunTime)-1]
+            if (lastCharInPossibleRunTime == 's'):
+                isNormal = True
+            if (isNormal == True):
+                runTime = genreArray[5].text.strip()
+                if(len(genreArray[6]) != 1 or genreArray[6].text[0] == '$'):
+                    studio = "N/A"
+                else:
+                    studio = genreArray[6].text.strip();
+            else: #Else switch the index around
+                runTime = genreArray[6].text.strip()
+                if(len(genreArray[5]) != 1 or genreArray[5].text[0] == '$'):
+                    studio = "N/A"
+                else:
+                    studio = genreArray[5].text.strip();
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Below is in charge of finding: directedBy
 #Getting the directors - stored in directedBy
