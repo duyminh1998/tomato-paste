@@ -51,15 +51,23 @@ def printData(url):
         if (lastCharInPossibleRunTime == 's'):
             isNormal = True
         if (isNormal == True):
-            runTime = genreArray[7].text.strip()
+            if (len(genreArray[7]) != 3):
+                    runTime = "N/A"
+            else: 
+                runTime = genreArray[7].text.strip()
             if(len(genreArray[8]) != 1 or genreArray[8].text[0] == '$'):
                 studio = "N/A"
             else:
                 studio = genreArray[8].text.strip();
         else: #Else switch the index around
-            runTime = genreArray[8].text.strip()
+            if (len(genreArray[8]) != 3):
+                    runTime = "N/A"
+            else: 
+                runTime = genreArray[8].text.strip()
             if(len(genreArray[7]) != 1 or genreArray[7].text[0] == '$'):
                 studio = "N/A"
+                if (len(genreArray[8]) == 1):
+                    studio = genreArray[8].text.strip()
             else:
                 studio = genreArray[7].text.strip();
 
@@ -70,15 +78,24 @@ def printData(url):
         if (lastCharInPossibleRunTime == 's'):
             isNormal = True
         if (isNormal == True):
-            runTime = genreArray[6].text.strip()
+            if (len(genreArray[6]) != 3):
+                runTime = "N/A"
+            else: 
+                runTime = genreArray[6].text.strip()
             if(len(genreArray[7]) != 1 or genreArray[7].text[0] == '$'):
+                print("In here")
                 studio = "N/A"
             else:
                 studio = genreArray[7].text.strip();
         else: #Else switch the index around
-            runTime = genreArray[7].text.strip()
+            if (len(genreArray[7]) != 3):
+                    runTime = "N/A"
+            else: 
+                runTime = genreArray[7].text.strip()
             if(len(genreArray[6]) != 1 or genreArray[6].text[0] == '$'):
                 studio = "N/A"
+                if (len(genreArray[7]) == 1):
+                    studio = genreArray[7].text.strip()
             else:
                 studio = genreArray[6].text.strip();
 
@@ -89,15 +106,23 @@ def printData(url):
             if (lastCharInPossibleRunTime == 's'):
                 isNormal = True
             if (isNormal == True):
-                runTime = genreArray[5].text.strip()
+                if (len(genreArray[5]) != 3):
+                    runTime = "N/A"
+                else: 
+                    runTime = genreArray[5].text.strip()
                 if(len(genreArray[6]) != 1 or genreArray[6].text[0] == '$'):
                     studio = "N/A"
                 else:
                     studio = genreArray[6].text.strip();
             else: #Else switch the index around
-                runTime = genreArray[6].text.strip()
+                if (len(genreArray[6]) != 3):
+                    runTime = "N/A"
+                else: 
+                    runTime = genreArray[6].text.strip()
                 if(len(genreArray[5]) != 1 or genreArray[5].text[0] == '$'):
                     studio = "N/A"
+                    if (len(genreArray[6]) == 1):
+                        studio = genreArray[6].text.strip()
                 else:
                     studio = genreArray[5].text.strip();
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------
