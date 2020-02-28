@@ -13,7 +13,7 @@ df = pd.DataFrame(columns = ["dataIndex", "realTitle", "criticsConcensus", "toma
 data = pd.read_csv("movie_data.csv", error_bad_lines=False, dtype='unicode')
 for i in range(0, 500):
         try:
-            fixed = fixNormal(data.at[randomList[i], "title"])
+            fixed = fixNormal(data.at[i, "title"])
             movie_data = printData("https://www.rottentomatoes.com/m/" + fixed)
             print("Success at fixNormal at new title: " + str(i))
             df.at[j, "realTitle"] = movie_data[0]
@@ -33,7 +33,7 @@ for i in range(0, 500):
             j += 1
         except:
             try:
-                fixed = fixWithoutThe(data.at[randomList[i], "title"])
+                fixed = fixWithoutThe(data.at[i, "title"])
                 movie_data = printData("https://www.rottentomatoes.com/m/" + fixed)
                 print("Success at fixWithoutThe at new title: " + str(i))
                 df.at[j, "realTitle"] = movie_data[0]
@@ -53,8 +53,8 @@ for i in range(0, 500):
                 j += 1
             except:
                 try:
-                    fixed = fixNormal(data.at[randomList[i], "title"])
-                    movie_data = printData("https://www.rottentomatoes.com/m/" + fixed + "_" + data.at[listTest[i], "Year"])
+                    fixed = fixNormal(data.at[i, "title"])
+                    movie_data = printData("https://www.rottentomatoes.com/m/" + fixed + "_" + data.at[i, "Year"])
                     print("Success at fixNormal with new title and years: " + str(i))
                     df.at[j, "realTitle"] = movie_data[0]
                     df.at[j, "criticsConcensus"] = movie_data[1]
@@ -73,7 +73,7 @@ for i in range(0, 500):
                     j += 1
                 except:
                     try:
-                        fixed = fixNormal(data.at[randomList[i], "original_title"])
+                        fixed = fixNormal(data.at[i, "original_title"])
                         movie_data = printData("https://www.rottentomatoes.com/m/" + fixed)
                         print("Success at fixNormal with Original title: " + str(i))
                         df.at[j, "realTitle"] = movie_data[0]
@@ -93,7 +93,7 @@ for i in range(0, 500):
                         j += 1
                     except:
                         try:
-                            fixed = fixWithoutA(data.at[randomList[i], "title"])
+                            fixed = fixWithoutA(data.at[i, "title"])
                             movie_data = printData("https://www.rottentomatoes.com/m/" + fixed)
                             print("Success at fixWithoutA: " + str(i))
                             df.at[j, "realTitle"] = movie_data[0]
