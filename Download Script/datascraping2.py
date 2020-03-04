@@ -44,8 +44,8 @@ def printData(url):
 #Getting the runtime - store in runTime
 #Getting the Studio - store in studio
 #Last Character in the length of runTime should always end with a 's' so here I will change my program to search if there is a 's' at the runTime string if there is no then I know that there is some mix up
-    studio = "N/A"
-    runTime = "N/A"
+    studio = "nothing"
+    runTime = "nothing"
     if (len(genreArray) == 9):
         possibleRunTime = genreArray[7].text.strip();
         isNormal = False
@@ -54,20 +54,20 @@ def printData(url):
             isNormal = True
         if (isNormal == True):
             if (len(genreArray[7]) != 3):
-                    runTime = "N/A"
+                    runTime = "nothing"
             else: 
                 runTime = genreArray[7].text.strip()
             if(len(genreArray[8]) != 1 or genreArray[8].text[0] == '$'):
-                studio = "N/A"
+                studio = "nothing"
             else:
                 studio = genreArray[8].text.strip();
         else: #Else switch the index around
             if (len(genreArray[8]) != 3):
-                    runTime = "N/A"
+                    runTime = "nothing"
             else: 
                 runTime = genreArray[8].text.strip()
             if(len(genreArray[7]) != 1 or genreArray[7].text[0] == '$'):
-                studio = "N/A"
+                studio = "nothing"
                 if (len(genreArray[8]) == 1):
                     studio = genreArray[8].text.strip()
             else:
@@ -81,21 +81,21 @@ def printData(url):
             isNormal = True
         if (isNormal == True):
             if (len(genreArray[6]) != 3):
-                runTime = "N/A"
+                runTime = "nothing"
             else: 
                 runTime = genreArray[6].text.strip()
             if(len(genreArray[7]) != 1 or genreArray[7].text[0] == '$'):
                 print("In here")
-                studio = "N/A"
+                studio = "nothing"
             else:
                 studio = genreArray[7].text.strip();
         else: #Else switch the index around
             if (len(genreArray[7]) != 3):
-                    runTime = "N/A"
+                    runTime = "nothing"
             else: 
                 runTime = genreArray[7].text.strip()
             if(len(genreArray[6]) != 1 or genreArray[6].text[0] == '$'):
-                studio = "N/A"
+                studio = "nothing"
                 if (len(genreArray[7]) == 1):
                     studio = genreArray[7].text.strip()
             else:
@@ -109,20 +109,20 @@ def printData(url):
                 isNormal = True
             if (isNormal == True):
                 if (len(genreArray[5]) != 3):
-                    runTime = "N/A"
+                    runTime = "nothing"
                 else: 
                     runTime = genreArray[5].text.strip()
                 if(len(genreArray[6]) != 1 or genreArray[6].text[0] == '$'):
-                    studio = "N/A"
+                    studio = "nothing"
                 else:
                     studio = genreArray[6].text.strip();
             else: #Else switch the index around
                 if (len(genreArray[6]) != 3):
-                    runTime = "N/A"
+                    runTime = "nothing"
                 else: 
                     runTime = genreArray[6].text.strip()
                 if(len(genreArray[5]) != 1 or genreArray[5].text[0] == '$'):
-                    studio = "N/A"
+                    studio = "nothing"
                     if (len(genreArray[6]) == 1):
                         studio = genreArray[6].text.strip()
                 else:
@@ -146,20 +146,20 @@ def printData(url):
     tomatoMeterArray = page_soup.findAll("span",{"class":"mop-ratings-wrap__percentage"})
     tomatoCountArray = page_soup.findAll("small",{"class","mop-ratings-wrap__text--small"})
     if (len(tomatoMeterArray) < 2):
-        tomatoMeter = "N/A"
-        tomatoCount = "N/A"
-        audienceCount = "N/A"
-        audienceScore = "N/A"
+        tomatoMeter = "nothing"
+        tomatoCount = "nothing"
+        audienceCount = "nothing"
+        audienceScore = "nothing"
     else:    
         try:
             tomatoMeter = tomatoMeterArray[0].text.strip()
         except:
-            tomatoMeter = "N/A"
+            tomatoMeter = "nothing"
             pass
         try:
             tomatoCount = tomatoCountArray[0].text.strip()
         except:
-            tomatoCount = "N/A"
+            tomatoCount = "nothing"
             pass
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Below is in charge of finding: audience store & count audienceScore & audienceCount
@@ -177,7 +177,7 @@ def printData(url):
     criticArray = page_soup.findAll("p",{"class":"mop-ratings-wrap__text mop-ratings-wrap__text--concensus"})
     criticsConcensus = "";
     if (len(criticArray) == 0):
-        criticsConcensus = "N/A";
+        criticsConcensus = "nothing";
     else:
         criticsConcensus = criticArray[0].text.strip()
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -200,9 +200,9 @@ def printData(url):
     try:
         cast = cast[0:len(cast)-2]
     except:
-        cast = "N/A"
+        cast = "nothing"
         pass
-# #-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 #This marks the end of the function - created by Trung Bui, Scraping Information from Rotten Tomatoes movies        
 
 #Checking the attributes
@@ -230,4 +230,3 @@ def fixWithoutThe(url):
 def fixWithoutA(url):
     return url.lower().replace(" ","_").replace("_-_", "_").replace(":","").replace("'","").replace("-","_").replace(",","").replace(".","").replace("!","").replace("é","e").replace("á","a").replace("a_","")
     
-data = pd.read_csv("movie_data.csv", error_bad_lines=False, dtype='unicode')
